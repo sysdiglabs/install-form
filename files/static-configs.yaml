@@ -1,0 +1,27 @@
+global:
+  sysdig:
+    region: "us3"
+nodeAnalyzer:
+  enabled: false
+agent:
+  slim:
+    enabled: false
+  auditLog:
+    enabled: false
+  sysdig:
+    settings:
+      host_scanner:
+        enabled: true
+        scan_on_start: true
+      kspm_analyzer:
+        enabled: true  
+clusterShield:
+  enabled: true
+  cluster_shield:
+    features:
+      audit:
+        enabled: true
+      container_vulnerability_management:
+        enabled: true
+      posture:
+        enabled: true
