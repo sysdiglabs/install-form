@@ -277,8 +277,22 @@ function setAgentConfigs(params) {
   // }
   let agentConfigs = {
     agent: {
+      ebpf: {
+        enabled: true,
+        kind: 'universal_ebpf'
+      }  
       slim: {
-        enabled: false,
+        enabled: true,
+        resources: {
+          requests: {
+            cpu: '250m',
+            memory: '348Mi'
+          },
+          limits: {
+            cpu: '1000m',
+            memory: '1024Mi',
+          }
+        }
       },
       auditLog: {
         enabled: false,
@@ -290,16 +304,6 @@ function setAgentConfigs(params) {
             "vz-vsadid:" + params.vsadId + "," + "vz-vastid:" + params.vastId,
         }
       },
-      resources: {
-        requests: {
-          cpu: '250m',
-          memory: '348Mi'
-        },
-        limits: {
-          cpu: '1000m',
-          memory: '1024Mi',
-        }
-      }
     },
   }
 
@@ -335,12 +339,12 @@ function setAgentConfigs(params) {
     }
   }
 
-  if (params.platform === "gke") {
-    agentConfigs.agent.ebpf = {
-      enabled: true,
-      kind: "universal_ebpf"
-    }
-  }
+  //if (params.platform === "gke") {
+  //  agentConfigs.agent.ebpf = {
+  //    enabled: true,
+  //    kind: "universal_ebpf"
+  //  }
+  //}
 
   if (params.priorityCheckbox.checked) {
     agentConfigs.agent.priorityClassName = params.priorityInput
