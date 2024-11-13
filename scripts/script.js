@@ -54,7 +54,7 @@ function toggleRegistryInputs(checkboxId, inputsContainerId) {
 
   if (checkbox.checked) {
     const registry_fields = ["Internal Registry", "Internal Registry Pull Secret", "Internal Sysdig Agent Image", "Internal Sysdig Cluster Shield  Image", "Sysdig Agent Tag", "Sysdig Cluster Shield Tag"];
-    const registry_placeholders = ["quay.io", "", "sysdig/agent", "sysdig/cluster-shield", params.agentTagsSelect.value, params.runtimeScannerTagsSelect.value];
+    const registry_placeholders = ["quay.io", "", "sysdig/agent-slim", "sysdig/cluster-shield", params.agentTagsSelect.value, params.runtimeScannerTagsSelect.value];
     // Clear existing inputs
     inputsContainer.innerHTML = '';
 
@@ -1110,7 +1110,7 @@ function showTab(tabId) {
 function populateTagOptions() {
   const dropdown = document.getElementById('agentTags');
 
-  fetch('https://quay.io/api/v1/repository/sysdig/agent/tag/', {
+  fetch('https://quay.io/api/v1/repository/sysdig/agent-slim/tag/', {
     headers: {
       'X-Requested-With': 'XMLHttpRequest'
     }
