@@ -54,7 +54,7 @@ function toggleRegistryInputs(checkboxId, inputsContainerId) {
 
   if (checkbox.checked) {
     const registry_fields = ["Internal Registry", "Internal Registry Pull Secret", "Internal Sysdig Agent Image", "Internal Sysdig Cluster Shield  Image", "Sysdig Agent Tag", "Sysdig Cluster Shield Tag"];
-    const registry_placeholders = ["quay.io", "", "sysdig/agent", "sysdig/cluster-shield", params.agentTagsSelect.value, params.runtimeScannerTagsSelect.value];
+    const registry_placeholders = ["quay.io", "", "sysdig/agent-slim", "sysdig/cluster-shield", params.agentTagsSelect.value, params.runtimeScannerTagsSelect.value];
     // Clear existing inputs
     inputsContainer.innerHTML = '';
 
@@ -78,7 +78,7 @@ function toggleProxyInputs(checkboxId, inputsContainerId) {
     inputsContainer.innerHTML = '';
 
     inputsContainer.appendChild(createTextInput('Proxy Host', 'proxy_host', true, 'replacewithyourproxy.com'));
-    inputsContainer.appendChild(createTextInput('Proxy Port', 'proxy_port', true, '1234'));
+    inputsContainer.appendChild(createTextInput('Proxy Port', 'proxy_port', true, 1234));
     inputsContainer.appendChild(createTextInput('No Proxy List(Comma delimited)', 'no_proxy_list', true, 'INCLUDE_CLUSTER_IP,replacewithyournoproxyhost.com,1.2.3.4'));
   } else {
     // Clear inputs when unchecked
@@ -280,7 +280,7 @@ function setAgentConfigs(params) {
       ebpf: {
         enabled: true,
         kind: 'universal_ebpf'
-      }  
+      },
       slim: {
         enabled: true,
         resources: {
@@ -339,12 +339,12 @@ function setAgentConfigs(params) {
     }
   }
 
-  if (params.platform === "gke") {
+ //if (params.platform === "gke") {
     agentConfigs.agent.ebpf = {
       enabled: true,
       kind: "universal_ebpf"
     }
-  }
+ // }
 
   if (params.priorityCheckbox.checked) {
     agentConfigs.agent.priorityClassName = params.priorityInput
@@ -374,31 +374,32 @@ function setHelmCommandAgentConfigs(params) {
   params.platform + "-" + params.environment + "-" + params.vastId + "-" + params.vsadId + "\\," +
    "vz-vsadid:" + params.vsadId +"\\," + "vz-vastid:" + params.vastId + "\" \\";
   
-  if (params.platform === "gke") {
-    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.agent.ebpf.enabled=true \\";
-  }
+  //if (params.platform === "gke") {
+  helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.agent.ebpf.enabled=true \\";
+  helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.agent.ebpf.kind=universal_ebpf \\";
+  //}
 
   if (params.proxyCheckbox.checked) {
     helmCommandAgentConfigs += "<br>&nbsp&nbsp; --set sysdig-deploy.agent.sysdig.settings.http_proxy.proxy_host=" + params.proxyInputs[0].value + " \\";
-    helmCommandAgentConfigs += "<br>&nbsp&nbsp; --set sysdig.deploy.agent.sysdig.settings.http_proxy.proxy_port=" + params.proxyInputs[1].value + " \\";
+    helmCommandAgentConfigs += "<br>&nbsp&nbsp; --set sysdig-deploy.agent.sysdig.settings.http_proxy.proxy_port=" + params.proxyInputs[1].value + " \\";
 
   } 
 
   if (params.registryCheckbox.checked) {
-    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.agent.image.tag=" + params.registryInputs[4].value + " \\";
-    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.agent.image.registry=" + params.registryInputs[0].value + " \\";
-    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.agent.image.repository=" + params.registryInputs[2].value + " \\";
+    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.agent-slim.image.tag=" + params.registryInputs[4].value + " \\";
+    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.agent-slim.image.registry=" + params.registryInputs[0].value + " \\";
+    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.agent-slim.image.repository=" + params.registryInputs[2].value + " \\";
     helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.clusterShield.image.registry=" + params.registryInputs[0].value + " \\";
     helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.clusterShield.image.repository=" + params.registryInputs[3].value + " \\";
-    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.clusterShield.image.tag=" + params.registryInputs[5].value + " \\";
+    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set clusterShield.image.tag=" + params.registryInputs[5].value + " \\";
     if (params.registryInputs[1].value != ""){
-      helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.agent.image.pullSecrets=" + params.registryInputs[1].value + " \\";
-      helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.clusterShield.pullSecrets=" + params.registryInputs[1].value + " \\";
+      helmCommandAgentConfigs += "<br>&nbsp;&nbsp;--set sysdig-deploy.agent-slim.image.pullSecrets=" + params.registryInputs[1].value + " \\";
+      helmCommandAgentConfigs += "<br>&nbsp;&nbsp;--set sysdig-deploy.clusterShield.pullSecrets=" + params.registryInputs[1].value + " \\";
     }
   }
   else {
-    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.agent.image.tag=" + params.agentTagsSelect.value + " \\";
-    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.clusterShield.image.tag=" + params.runtimeScannerTagsSelect.value + " \\";
+    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.agent-slim.image.tag=" + params.agentTagsSelect.value + " \\";
+    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set clusterShield.image.tag=" + params.runtimeScannerTagsSelect.value + " \\";
   }
 
   if (params.priorityCheckbox.checked) {
@@ -846,6 +847,7 @@ function setClusterShieldConfigs(params) {
   let clusterShieldConfigs = {
     clusterShield: {
       enabled: true,
+      hostNetwork: false,
     cluster_shield:{
       log_level:'err',
       features:{
@@ -1049,6 +1051,7 @@ function showTab(tabId) {
   for (var i = 0; i < tabButtons.length; i++) {
     tabButtons[i].classList.remove("active-tab");
   }
+  const  cmdCopyBtn =document.getElementById('cmdCopyBtn');
   const completeValues = document.getElementById('static-values');
   const staticValues = document.getElementById('complete-values');
   const manifestValues = document.getElementById('manifest-values');
@@ -1056,18 +1059,33 @@ function showTab(tabId) {
     completeValues.classList.add('hidden');
     staticValues.classList.remove('hidden');
     manifestValues.classList.add('hidden');
+    cmdCopyBtn.classList.add('hidden');
   }
   else if (tabId == "helm-commands") {
     staticValues.classList.add('hidden');
     completeValues.classList.remove('hidden');
     manifestValues.classList.add('hidden');
+    cmdCopyBtn.classList.remove('hidden');
+    cmdCopyBtn.classList.add('not-hidden');
   }
   else if (tabId == "using-manifests") {
     completeValues.classList.add('hidden');
     staticValues.classList.add('hidden');
     manifestValues.classList.remove('hidden');
+    cmdCopyBtn.classList.add('hidden');
   }
   document.querySelector('[onclick="showTab(\'' + tabId + '\')"]').classList.add("active-tab");
+}
+function copyText() {
+  const tempTextArea = document.createElement("textarea");
+  tempTextArea.value = document.getElementById("helm-commands").innerText;
+  document.body.appendChild(tempTextArea);
+  console.log(tempTextArea);
+  tempTextArea.select();
+  tempTextArea.setSelectionRange(0, 99999); 
+  document.execCommand("copy");
+  document.body.removeChild(tempTextArea);
+  alert("Text copied to clipboard!");
 }
 
 // function autoPopulateClusterName(params) {
@@ -1114,7 +1132,7 @@ function showTab(tabId) {
 function populateTagOptions() {
   const dropdown = document.getElementById('agentTags');
 
-  fetch('https://quay.io/api/v1/repository/sysdig/agent/tag/', {
+  fetch('https://quay.io/api/v1/repository/sysdig/agent-slim/tag/', {
     headers: {
       'X-Requested-With': 'XMLHttpRequest'
     }
@@ -1282,3 +1300,8 @@ function downloadStaticYamlFile() {
     console.error('No imported YAML data available.');
 }
 }
+
+
+
+
+
