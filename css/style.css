@@ -39,13 +39,16 @@ a {
 }
 
 .kubectlCommandText {
-  color: #cccccc;
+  color: #f2f2f2;
   text-wrap: wrap;
   font-family: "PT Mono";
-  background-color: #333333;
+  background-color: #111827;
   padding: 5px;
   border-radius: 5px;
-  border: 1px solid #cccccc;
+}
+
+#helm-commands{
+  text-wrap: auto;
 }
 
 label {
