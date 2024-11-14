@@ -370,40 +370,40 @@ function setAgentConfigs(params) {
 
 function setHelmCommandAgentConfigs(params) {
   let helmCommandAgentConfigs = "";
-  helmCommandAgentConfigs += "<br>&nbsp&nbsp; --set sysdig-deploy.agent.sysdig.settings.tags=" + "\"cluster:" + params.businessUnit + "-" + 
+  helmCommandAgentConfigs += "<br>&nbsp&nbsp; --set agent.sysdig.settings.tags=" + "\"cluster:" + params.businessUnit + "-" + 
   params.platform + "-" + params.environment + "-" + params.vastId + "-" + params.vsadId + "\\," +
    "vz-vsadid:" + params.vsadId +"\\," + "vz-vastid:" + params.vastId + "\" \\";
   
   //if (params.platform === "gke") {
-  helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.agent.ebpf.enabled=true \\";
-  helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.agent.ebpf.kind=universal_ebpf \\";
+  helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set agent.ebpf.enabled=true \\";
+  helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set agent.ebpf.kind=universal_ebpf \\";
   //}
 
   if (params.proxyCheckbox.checked) {
-    helmCommandAgentConfigs += "<br>&nbsp&nbsp; --set sysdig-deploy.agent.sysdig.settings.http_proxy.proxy_host=" + params.proxyInputs[0].value + " \\";
-    helmCommandAgentConfigs += "<br>&nbsp&nbsp; --set sysdig-deploy.agent.sysdig.settings.http_proxy.proxy_port=" + params.proxyInputs[1].value + " \\";
+    helmCommandAgentConfigs += "<br>&nbsp&nbsp; --set agent.sysdig.settings.http_proxy.proxy_host=" + params.proxyInputs[0].value + " \\";
+    helmCommandAgentConfigs += "<br>&nbsp&nbsp; --set agent.sysdig.settings.http_proxy.proxy_port=" + params.proxyInputs[1].value + " \\";
 
   } 
 
   if (params.registryCheckbox.checked) {
-    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.agent.slim.image.tag=" + params.registryInputs[4].value + " \\";
-    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.agent.slim.image.registry=" + params.registryInputs[0].value + " \\";
-    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.agent.slim.image.repository=" + params.registryInputs[2].value + " \\";
-    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.clusterShield.image.registry=" + params.registryInputs[0].value + " \\";
-    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.clusterShield.image.repository=" + params.registryInputs[3].value + " \\";
-    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.clusterShield.image.tag=" + params.registryInputs[5].value + " \\";
+    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set agent.slim.image.tag=" + params.registryInputs[4].value + " \\";
+    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set agent.slim.image.registry=" + params.registryInputs[0].value + " \\";
+    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set agent.slim.image.repository=" + params.registryInputs[2].value + " \\";
+    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set clusterShield.image.registry=" + params.registryInputs[0].value + " \\";
+    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set clusterShield.image.repository=" + params.registryInputs[3].value + " \\";
+    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set clusterShield.image.tag=" + params.registryInputs[5].value + " \\";
     if (params.registryInputs[1].value != ""){
-      helmCommandAgentConfigs += "<br>&nbsp;&nbsp;--set sysdig-deploy.agent.slim.image.pullSecrets=" + params.registryInputs[1].value + " \\";
-      helmCommandAgentConfigs += "<br>&nbsp;&nbsp;--set sysdig-deploy.clusterShield.pullSecrets=" + params.registryInputs[1].value + " \\";
+      helmCommandAgentConfigs += "<br>&nbsp;&nbsp;--set agent.slim.image.pullSecrets=" + params.registryInputs[1].value + " \\";
+      helmCommandAgentConfigs += "<br>&nbsp;&nbsp;--set clusterShield.pullSecrets=" + params.registryInputs[1].value + " \\";
     }
   }
   else {
-    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.agent.slim.image.tag=" + params.agentTagsSelect.value + " \\";
-    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.clusterShield.image.tag=" + params.runtimeScannerTagsSelect.value + " \\";
+    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set agent.slim.image.tag=" + params.agentTagsSelect.value + " \\";
+    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set clusterShield.image.tag=" + params.runtimeScannerTagsSelect.value + " \\";
   }
 
   if (params.priorityCheckbox.checked) {
-    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.agent.priorityClassName=" + params.priorityInput + " \\";
+    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set agent.priorityClassName=" + params.priorityInput + " \\";
   }
 
   return helmCommandAgentConfigs
@@ -424,13 +424,13 @@ function setHelmCommandNodeAnalyzerRuntimeConfigs(params) {
     let memoryLimitBytes = 2 * maxImageSize;
     memoryLimitGigabytes = Math.ceil(convertBytesToGigabytes(memoryLimitBytes)) + 'Gi';
 
-    helmCommandNodeAnalyzerRuntimeConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.clusterShield.settings.maxImageSizeAllowed=" + maxImageSize + "\\";
-    helmCommandNodeAnalyzerRuntimeConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.clusterShield.resources.requests.ephemeral-storage=" + ephemeralStorageRequestGigabytes + "\\";
-    helmCommandNodeAnalyzerRuntimeConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.clusterShield.resources.limits.memory=" + memoryLimitGigabytes + "\\";
-    helmCommandNodeAnalyzerRuntimeConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.clusterShield.resources.limits.ephemeral-storage=" + ephemeralStorageLimitGigabytes + "\\";
+    helmCommandNodeAnalyzerRuntimeConfigs += "<br>&nbsp;&nbsp; --set clusterShield.settings.maxImageSizeAllowed=" + maxImageSize + "\\";
+    helmCommandNodeAnalyzerRuntimeConfigs += "<br>&nbsp;&nbsp; --set clusterShield.resources.requests.ephemeral-storage=" + ephemeralStorageRequestGigabytes + "\\";
+    helmCommandNodeAnalyzerRuntimeConfigs += "<br>&nbsp;&nbsp; --set clusterShield.resources.limits.memory=" + memoryLimitGigabytes + "\\";
+    helmCommandNodeAnalyzerRuntimeConfigs += "<br>&nbsp;&nbsp; --set clusterShield.resources.limits.ephemeral-storage=" + ephemeralStorageLimitGigabytes + "\\";
   }
   if (params.platform === "ocp") {
-    helmCommandNodeAnalyzerRuntimeConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.clusterShield.env.SCANNER_RUN_TIMEOUT=3h \\";
+    helmCommandNodeAnalyzerRuntimeConfigs += "<br>&nbsp;&nbsp; --set clusterShield.env.SCANNER_RUN_TIMEOUT=3h \\";
   }
 
   return helmCommandNodeAnalyzerRuntimeConfigs;
