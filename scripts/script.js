@@ -386,20 +386,20 @@ function setHelmCommandAgentConfigs(params) {
   } 
 
   if (params.registryCheckbox.checked) {
-    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.agent-slim.image.tag=" + params.registryInputs[4].value + " \\";
-    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.agent-slim.image.registry=" + params.registryInputs[0].value + " \\";
-    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.agent-slim.image.repository=" + params.registryInputs[2].value + " \\";
+    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.agent.slim.image.tag=" + params.registryInputs[4].value + " \\";
+    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.agent.slim.image.registry=" + params.registryInputs[0].value + " \\";
+    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.agent.slim.image.repository=" + params.registryInputs[2].value + " \\";
     helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.clusterShield.image.registry=" + params.registryInputs[0].value + " \\";
     helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.clusterShield.image.repository=" + params.registryInputs[3].value + " \\";
-    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set clusterShield.image.tag=" + params.registryInputs[5].value + " \\";
+    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.clusterShield.image.tag=" + params.registryInputs[5].value + " \\";
     if (params.registryInputs[1].value != ""){
-      helmCommandAgentConfigs += "<br>&nbsp;&nbsp;--set sysdig-deploy.agent-slim.image.pullSecrets=" + params.registryInputs[1].value + " \\";
+      helmCommandAgentConfigs += "<br>&nbsp;&nbsp;--set sysdig-deploy.agent.slim.image.pullSecrets=" + params.registryInputs[1].value + " \\";
       helmCommandAgentConfigs += "<br>&nbsp;&nbsp;--set sysdig-deploy.clusterShield.pullSecrets=" + params.registryInputs[1].value + " \\";
     }
   }
   else {
-    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.agent-slim.image.tag=" + params.agentTagsSelect.value + " \\";
-    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set clusterShield.image.tag=" + params.runtimeScannerTagsSelect.value + " \\";
+    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.agent.slim.image.tag=" + params.agentTagsSelect.value + " \\";
+    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.clusterShield.image.tag=" + params.runtimeScannerTagsSelect.value + " \\";
   }
 
   if (params.priorityCheckbox.checked) {
