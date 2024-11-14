@@ -387,14 +387,14 @@ function setHelmCommandAgentConfigs(params) {
 
   if (params.registryCheckbox.checked) {
     helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set agent.slim.image.tag=" + params.registryInputs[4].value + " \\";
-    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set agent.image.registry=" + params.registryInputs[0].value + " \\";
+    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set global.image.registry=" + params.registryInputs[0].value + " \\";
     helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set agent.slim.image.repository=" + params.registryInputs[2].value + " \\";
-    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set clusterShield.image.registry=" + params.registryInputs[0].value + " \\";
+//     helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set clusterShield.image.registry=" + params.registryInputs[0].value + " \\";
     helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set clusterShield.image.repository=" + params.registryInputs[3].value + " \\";
     helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set clusterShield.image.tag=" + params.registryInputs[5].value + " \\";
     if (params.registryInputs[1].value != ""){
-      helmCommandAgentConfigs += "<br>&nbsp;&nbsp;--set agent.slim.image.pullSecrets=" + params.registryInputs[1].value + " \\";
-      helmCommandAgentConfigs += "<br>&nbsp;&nbsp;--set clusterShield.pullSecrets=" + params.registryInputs[1].value + " \\";
+      helmCommandAgentConfigs += "<br>&nbsp;&nbsp;--set global.image.pullSecrets=" + params.registryInputs[1].value + " \\";
+//      helmCommandAgentConfigs += "<br>&nbsp;&nbsp;--set clusterShield.pullSecrets=" + params.registryInputs[1].value + " \\";
     }
   }
   else {
