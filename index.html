@@ -225,6 +225,7 @@ kubectl get nodes -o json | jq -r '.items[].status.images[] | .sizeBytes' | sort
       <div id="helm-commands" class="tab-content">Please fill in all required fields.</div>
       <div id="values-yaml" class="tab-content">Please fill in all required fields.</div>
       <br>
+      <button id="cmdCopyBtn" onclick="copyText()">Copy</button>
       <div class="hidden" id="complete-values">
         <!-- <label>Download the above content and save it to a file named values.yaml:</label> -->
         <label>Run following commands for installation</label>
