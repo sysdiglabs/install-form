@@ -393,7 +393,7 @@ function setHelmCommandAgentConfigs(params) {
     helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set clusterShield.image.repository=" + params.registryInputs[3].value + " \\";
     helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set clusterShield.image.tag=" + params.registryInputs[5].value + " \\";
     if (params.registryInputs[1].value != ""){
-      helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set global.image.pullSecrets=" + params.registryInputs[1].value + " \\";
+      helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set global.image.pullSecrets[0].name=" + params.registryInputs[1].value + " \\";
 //      helmCommandAgentConfigs += "<br>&nbsp;&nbsp;--set clusterShield.pullSecrets=" + params.registryInputs[1].value + " \\";
     }
   }
