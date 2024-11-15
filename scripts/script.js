@@ -430,7 +430,8 @@ function setHelmCommandNodeAnalyzerRuntimeConfigs(params) {
     helmCommandNodeAnalyzerRuntimeConfigs += "<br>&nbsp;&nbsp; --set clusterShield.resources.limits.ephemeral-storage=" + ephemeralStorageLimitGigabytes + "\\";
   }
   if (params.platform === "ocp") {
-    helmCommandNodeAnalyzerRuntimeConfigs += "<br>&nbsp;&nbsp; --set clusterShield.env.SCANNER_RUN_TIMEOUT=3h \\";
+    helmCommandNodeAnalyzerRuntimeConfigs += "<br>&nbsp;&nbsp; --set clusterShield.env[0].name=SCANNER_RUN_TIMEOUT \\";
+    helmCommandNodeAnalyzerRuntimeConfigs += "<br>&nbsp;&nbsp; --set clusterShield.env[0].value=3h \\";
   }
 
   return helmCommandNodeAnalyzerRuntimeConfigs;
