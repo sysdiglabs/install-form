@@ -1077,11 +1077,25 @@ function showTab(tabId) {
   }
   document.querySelector('[onclick="showTab(\'' + tabId + '\')"]').classList.add("active-tab");
 }
+//function copyText() {
+//  const tempTextArea = document.createElement("textarea");
+//  tempTextArea.value = document.getElementById("helm-commands").innerText;
+//  document.body.appendChild(tempTextArea);
+//  console.log(tempTextArea);
+//  tempTextArea.select();
+//  tempTextArea.setSelectionRange(0, 99999); 
+//  document.execCommand("copy");
+//  document.body.removeChild(tempTextArea);
+//  alert("Text copied to clipboard!");
+// }
+
 function copyText() {
   const tempTextArea = document.createElement("textarea");
-  tempTextArea.value = document.getElementById("helm-commands").innerText;
+  let text = document.getElementById("helm-commands").innerText;
+  // Replace NBSPs with regular spaces
+  text = text.replace(/\u00A0/g, ' ');
+  tempTextArea.value = text;
   document.body.appendChild(tempTextArea);
-  console.log(tempTextArea);
   tempTextArea.select();
   tempTextArea.setSelectionRange(0, 99999); 
   document.execCommand("copy");
