@@ -849,10 +849,12 @@ function setClusterShieldConfigs(params) {
     clusterShield: {
       enabled: true,
       hostNetwork: false,
-      env: {
-        name:"SCANNER_RUN_TIMEOUT",
-        value: "3h",
-      },
+      env: [
+        {
+          name: "SCANNER_RUN_TIMEOUT",
+          value: "3h"
+        },
+      ],
     cluster_shield:{
       log_level:'err',
       features:{
