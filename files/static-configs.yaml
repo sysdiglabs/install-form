@@ -1,27 +1,55 @@
 global:
   sysdig:
-    region: "us3"
-nodeAnalyzer:
-  enabled: false
+    region: us3
 agent:
-  slim:
+  monitor:
     enabled: false
+  logPriority: error
+  slim:
+    enabled: true
   auditLog:
     enabled: false
   sysdig:
     settings:
-      host_scanner:
-        enabled: true
-        scan_on_start: true
-      kspm_analyzer:
-        enabled: true  
+      feature:
+        mode: secure_light
+      prometheus:
+        enabled: false
+  ebpf:
+    enabled: true
+    kind: universal_ebpf
+  resources:
+    requests:
+      cpu: 250m
+      memory: 348Mi
+    limits:
+      cpu: 1000m
+      memory: 1024Mi
+nodeAnalyzer:
+  enabled: false
 clusterShield:
   enabled: true
+  hostNetwork: false
+  env:
+    - name: SCANNER_RUN_TIMEOUT
+      value: 3h
   cluster_shield:
+    log_level: err
     features:
-      audit:
-        enabled: true
+      kubernetes_metadata:
+        enabled: false
       container_vulnerability_management:
         enabled: true
+      admission_control:
+        enabled: false
+      audit:
+        enabled: false
       posture:
-        enabled: true
+        enabled: false
+  resources:
+    requests:
+      cpu: 500m
+      memory: 512Mi
+    limits:
+      cpu: 2000m
+      memory: 2048Mi
