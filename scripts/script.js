@@ -316,12 +316,12 @@ function setAgentConfigs(params) {
   //   }
   // }
 
-  if (params.proxyCheckbox.checked) {
-    agentConfigs.agent.sysdig.settings.http_proxy = {
-        proxy_host: params.proxyInputs[0].value,
-        proxy_port: params.proxyInputs[1].value,
-      }
-  }
+ // if (params.proxyCheckbox.checked) {
+ //   agentConfigs.agent.sysdig.settings.http_proxy = {
+ //       proxy_host: params.proxyInputs[0].value,
+ //       proxy_port: params.proxyInputs[1].value,
+ //     }
+ // }
 
   if (params.registryCheckbox.checked) {
     agentConfigs.agent.image = {
@@ -382,11 +382,11 @@ function setHelmCommandAgentConfigs(params) {
   helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set agent.ebpf.kind=universal_ebpf \\";
   //}
 
-  if (params.proxyCheckbox.checked) {
-    helmCommandAgentConfigs += "<br>&nbsp&nbsp; --set agent.sysdig.settings.http_proxy.proxy_host=" + params.proxyInputs[0].value + " \\";
-    helmCommandAgentConfigs += "<br>&nbsp&nbsp; --set agent.sysdig.settings.http_proxy.proxy_port=" + params.proxyInputs[1].value + " \\";
-
-  } 
+//  if (params.proxyCheckbox.checked) {
+//    helmCommandAgentConfigs += "<br>&nbsp&nbsp; --set agent.sysdig.settings.http_proxy.proxy_host=" + params.proxyInputs[0].value + " \\";
+//    helmCommandAgentConfigs += "<br>&nbsp&nbsp; --set agent.sysdig.settings.http_proxy.proxy_port=" + params.proxyInputs[1].value + " \\";
+//
+//  } 
 
   if (params.registryCheckbox.checked) {
     helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set agent.image.tag=" + params.registryInputs[4].value + " \\";
