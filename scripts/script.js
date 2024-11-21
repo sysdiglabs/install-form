@@ -282,17 +282,18 @@ function setAgentConfigs(params) {
         kind: 'universal_ebpf'
       },
       slim: {
-        enabled: true,
-        resources: {
-          requests: {
-            cpu: '250m',
-            memory: '348Mi'
-          },
-          limits: {
-            cpu: '1000m',
-            memory: '1024Mi',
-          }
+        enabled: true
+      },
+      resources: {
+        requests: {
+          cpu: '250m',
+          memory: '348Mi',
+        },
+        limits: {
+          cpu: '1000m',
+          memory: '1024Mi',
         }
+      }
       },
       auditLog: {
         enabled: false,
@@ -304,8 +305,8 @@ function setAgentConfigs(params) {
             "vz-vsadid:" + params.vsadId + "," + "vz-vastid:" + params.vastId,
         }
       },
-    },
-  }
+    }
+  
 
   // if (params.regionInput === "custom") {
   //   agentConfigs.agent.collectorSettings = {
