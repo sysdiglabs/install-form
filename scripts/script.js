@@ -329,6 +329,8 @@ function setAgentConfigs(params) {
     }
     if (params.registryInputs[1].value != "") {
       agentConfigs.agent.image = {
+        repository: params.registryInputs[2].value,
+        tag: params.registryInputs[4].value,
         pullSecrets: params.registryInputs[1].value,
       }
     }
@@ -895,7 +897,7 @@ function setClusterShieldConfigs(params) {
       tag: params.registryInputs[5].value,
     }
     if (params.registryInputs[1].value != "") {
-      clusterShieldConfigs.clusterShield.imagePullSecrets = params.registryInputs[1].value;
+      clusterShieldConfigs.clusterShield.image.pullSecrets = params.registryInputs[1].value;
     }
   }
   else {
