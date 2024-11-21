@@ -324,12 +324,12 @@ function setAgentConfigs(params) {
  // }
 
   if (params.registryCheckbox.checked) {
-    agentConfigs.agent.image = {
+    agentConfigs.agent.slim.image = {
       repository: params.registryInputs[2].value,
       tag: params.registryInputs[4].value,
     }
     if (params.registryInputs[1].value != "") {
-      agentConfigs.agent.image = {
+      agentConfigs.agent.slim.image = {
         repository: params.registryInputs[2].value,
         tag: params.registryInputs[4].value,
         pullSecrets: params.registryInputs[1].value,
@@ -337,7 +337,7 @@ function setAgentConfigs(params) {
     }
   }
   else {
-    agentConfigs.agent.image = {
+    agentConfigs.agent.slim.image = {
       tag: params.agentTagsSelect.value,
     }
   }
@@ -389,9 +389,9 @@ function setHelmCommandAgentConfigs(params) {
 //  } 
 
   if (params.registryCheckbox.checked) {
-    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set agent.image.tag=" + params.registryInputs[4].value + " \\";
+    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set agent.slim.image.tag=" + params.registryInputs[4].value + " \\";
     helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set global.image.registry=" + params.registryInputs[0].value + " \\";
-    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set agent.image.repository=" + params.registryInputs[2].value + " \\";
+    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set agent.slim.image.repository=" + params.registryInputs[2].value + " \\";
 //     helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set clusterShield.image.registry=" + params.registryInputs[0].value + " \\";
     helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set clusterShield.image.repository=" + params.registryInputs[3].value + " \\";
     helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set clusterShield.image.tag=" + params.registryInputs[5].value + " \\";
@@ -401,7 +401,7 @@ function setHelmCommandAgentConfigs(params) {
     }
   }
   else {
-    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set agent.image.tag=" + params.agentTagsSelect.value + " \\";
+    helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set agent.slim.image.tag=" + params.agentTagsSelect.value + " \\";
     helmCommandAgentConfigs += "<br>&nbsp;&nbsp; --set clusterShield.image.tag=" + params.runtimeScannerTagsSelect.value + " \\";
   }
 
