@@ -418,6 +418,8 @@ function setHelmCommandNodeAnalyzerRuntimeConfigs(params) {
   let ephemeralStorageRequestGigabytes = '3Gi'
   let ephemeralStorageLimitGigabytes = '6Gi'
   let memoryLimitGigabytes = '4Gi'
+  helmCommandNodeAnalyzerRuntimeConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.clusterShield.env.name = SCANNER_RUN_TIMEOUT \\";
+  helmCommandNodeAnalyzerRuntimeConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.clusterShield.env.value = 3h \\";
   if (params.imageSizeInput != null && parseInt(params.imageSizeInput.value) > parseInt(maxImageSize)) {
     maxImageSize = params.imageSizeInput.value
     let ephemeralStorageRequestBytes = 1.5 * maxImageSize;
@@ -432,10 +434,10 @@ function setHelmCommandNodeAnalyzerRuntimeConfigs(params) {
     helmCommandNodeAnalyzerRuntimeConfigs += "<br>&nbsp;&nbsp; --set clusterShield.resources.limits.memory=" + memoryLimitGigabytes + "\\";
     helmCommandNodeAnalyzerRuntimeConfigs += "<br>&nbsp;&nbsp; --set clusterShield.resources.limits.ephemeral-storage=" + ephemeralStorageLimitGigabytes + "\\";
   }
-  if (params.platform === "ocp") {
-    helmCommandNodeAnalyzerRuntimeConfigs += "<br>&nbsp;&nbsp; --set clusterShield.env[0].name=SCANNER_RUN_TIMEOUT \\";
-    helmCommandNodeAnalyzerRuntimeConfigs += "<br>&nbsp;&nbsp; --set clusterShield.env[0].value=3h \\";
-  }
+ // if (params.platform === "ocp") {
+ //   helmCommandNodeAnalyzerRuntimeConfigs += "<br>&nbsp;&nbsp; --set clusterShield.env[0].name=SCANNER_RUN_TIMEOUT \\";
+ //   helmCommandNodeAnalyzerRuntimeConfigs += "<br>&nbsp;&nbsp; --set clusterShield.env[0].value=3h \\";
+ // }
 
   return helmCommandNodeAnalyzerRuntimeConfigs;
 }
