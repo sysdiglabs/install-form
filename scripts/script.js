@@ -418,8 +418,8 @@ function setHelmCommandNodeAnalyzerRuntimeConfigs(params) {
   let ephemeralStorageRequestGigabytes = '3Gi'
   let ephemeralStorageLimitGigabytes = '6Gi'
   let memoryLimitGigabytes = '4Gi'
-  helmCommandNodeAnalyzerRuntimeConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.clusterShield.env.name = SCANNER_RUN_TIMEOUT \\";
-  helmCommandNodeAnalyzerRuntimeConfigs += "<br>&nbsp;&nbsp; --set sysdig-deploy.clusterShield.env.value = 3h \\";
+  helmCommandNodeAnalyzerRuntimeConfigs += "<br>&nbsp;&nbsp; --set clusterShield.env.name = SCANNER_RUN_TIMEOUT \\";
+  helmCommandNodeAnalyzerRuntimeConfigs += "<br>&nbsp;&nbsp; --set clusterShield.env.value = 3h \\";
   if (params.imageSizeInput != null && parseInt(params.imageSizeInput.value) > parseInt(maxImageSize)) {
     maxImageSize = params.imageSizeInput.value
     let ephemeralStorageRequestBytes = 1.5 * maxImageSize;
