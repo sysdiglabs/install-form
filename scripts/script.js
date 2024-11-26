@@ -73,8 +73,8 @@ function toggleRegistryInputs(checkboxId, inputsContainerId) {
     const agentTagsdropdown = document.getElementById('agentTags');
     const runtimeScannerTagsdropdown = document.getElementById('runtimeScannerTags');
     
-    agentTagsdropdown.disabled = true;
-    runtimeScannerTagsdropdown.disabled = true;
+    agentTagsdropdown.disabled = false;
+    runtimeScannerTagsdropdown.disabled = false;
     // Clear inputs when unchecked
     inputsContainer.innerHTML = '';
   }
