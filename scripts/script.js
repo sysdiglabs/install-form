@@ -55,6 +55,13 @@ function toggleRegistryInputs(checkboxId, inputsContainerId) {
   if (checkbox.checked) {
     const registry_fields = ["Internal Registry", "Internal Registry Pull Secret", "Internal Sysdig Agent Image", "Internal Sysdig Cluster Shield  Image", "Sysdig Agent Tag", "Sysdig Cluster Shield Tag"];
     const registry_placeholders = ["quay.io", "", "sysdig/agent-slim", "sysdig/cluster-shield", params.agentTagsSelect.value, params.runtimeScannerTagsSelect.value];
+
+    const agentTagsdropdown = document.getElementById('agentTags');
+    const runtimeScannerTagsdropdown = document.getElementById('runtimeScannerTags');
+    
+    agentTagsdropdown.disabled = true;
+    runtimeScannerTagsdropdown.disabled = true;
+    
     // Clear existing inputs
     inputsContainer.innerHTML = '';
 
@@ -63,6 +70,11 @@ function toggleRegistryInputs(checkboxId, inputsContainerId) {
       inputsContainer.appendChild(createTextInput(registry_fields[i], registry_fields[i], false, registry_placeholders[i]));
     }
   } else {
+    const agentTagsdropdown = document.getElementById('agentTags');
+    const runtimeScannerTagsdropdown = document.getElementById('runtimeScannerTags');
+    
+    agentTagsdropdown.disabled = true;
+    runtimeScannerTagsdropdown.disabled = true;
     // Clear inputs when unchecked
     inputsContainer.innerHTML = '';
   }
@@ -1156,7 +1168,7 @@ function copyText() {
 
 // Function to fetch the tags from the Quay.io repository and populate the dropdown
 function populateTagOptions() {
-  const dropdown = document.getElementById('agentTags');
+  const agentTagsdropdown = document.getElementById('agentTags');
 
   fetch('https://quay.io/api/v1/repository/sysdig/agent-slim/tag/', {
     headers: {
@@ -1174,7 +1186,7 @@ function populateTagOptions() {
         const option = document.createElement('option');
         option.value = tag;
         option.textContent = tag;
-        dropdown.appendChild(option);
+        agentTagsdropdown.appendChild(option);
       });
     })
     .catch(error => {
@@ -1225,7 +1237,7 @@ window.addEventListener('DOMContentLoaded', populateTagOptions);
 
 // Function to fetch the tags from the Quay.io repository and populate the dropdown for Cluster shield
 function populateClusterShieldTagOptions() {
-  const dropdown = document.getElementById('runtimeScannerTags');
+  const runtimeScannerTagsdropdown = document.getElementById('runtimeScannerTags');
 
   fetch('https://quay.io/api/v1/repository/sysdig/cluster-shield/tag/', {
     headers: {
@@ -1243,7 +1255,7 @@ function populateClusterShieldTagOptions() {
         const option = document.createElement('option');
         option.value = tag;
         option.textContent = tag;
-        dropdown.appendChild(option);
+        runtimeScannerTagsdropdown.appendChild(option);
       });
     })
     .catch(error => {
