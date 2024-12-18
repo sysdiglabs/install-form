@@ -300,6 +300,9 @@ function setAgentConfigs(params) {
         enabled: true,
         kind: 'universal_ebpf'
       },
+      auditLog: {
+        enabled: false,
+      },
       slim: {
         enabled: true
       },
@@ -313,10 +316,7 @@ function setAgentConfigs(params) {
           memory: '1024Mi',
         }
       }
-      },
-      auditLog: {
-        enabled: false,
-      },
+      }
     }
   
 
