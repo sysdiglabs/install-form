@@ -289,6 +289,13 @@ function setAgentConfigs(params) {
   // }
   let agentConfigs = {
     agent: {
+      sysdig: {
+        settings: {
+          tags: "cluster:" + params.businessUnit + "-" +
+            params.platform + "-" + params.environment + "-" + params.vastId + "-" + params.vsadId + "," +
+            "vz-vsadid:" + params.vsadId + "," + "vz-vastid:" + params.vastId,
+        }
+      },
       ebpf: {
         enabled: true,
         kind: 'universal_ebpf'
@@ -309,13 +316,6 @@ function setAgentConfigs(params) {
       },
       auditLog: {
         enabled: false,
-      },
-      sysdig: {
-        settings: {
-          tags: "cluster:" + params.businessUnit + "-" +
-            params.platform + "-" + params.environment + "-" + params.vastId + "-" + params.vsadId + "," +
-            "vz-vsadid:" + params.vsadId + "," + "vz-vastid:" + params.vastId,
-        }
       },
     }
   
