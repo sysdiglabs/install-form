@@ -1,4 +1,5 @@
-<h2 id="table-of-contents">Table of Contents</h2>
+<html>
+<h2 id="table-of-contents">Table Of Contents</h2>
 <ul>
 <li><a href="#sysdig-installation-pre-reqs">Sysdig Installation Pre-Reqs</a></li>
 <li><a href="#sysdig-installation">Sysdig Installation</a></li>
@@ -105,3 +106,4 @@ If any of the pods are not 1/1 Running state, you can review the logs for that p
 </ul>
 <pre><code>    kubectl logs sysdig-agent-xxxxx -n kube-<span class="hljs-keyword">system</span> | grep -i <span class="hljs-built_in">error</span>
 </code></pre>
+</html>
