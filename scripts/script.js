@@ -1046,7 +1046,7 @@ function generateInstallCommandForManifests() {
         href="https://github.com/helm/helm/releases">HERE</a>. Additional helm install docs found <a target="_blank"
         href="https://helm.sh/docs/intro/install/">HERE</a>.
         <br> 3. Download script to generate manifest
-        <br>&nbsp; - wget https://raw.githubusercontent.com/kadkins-sysdig/sysdig-tools/main/gen-sysdig-manifests.sh
+        <br>&nbsp; - wget https://raw.githubusercontent.com/sysdiglabs/install-form/main/files/gen-sysdig-manifests.sh
         <br> 4. Make script executable
         <br>&nbsp; - chmod +x gen-sysdig-manifests.sh
         <br> 5. Execute script to generate manifests. See example below:
