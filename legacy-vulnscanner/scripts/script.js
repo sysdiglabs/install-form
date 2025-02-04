@@ -932,7 +932,7 @@ function generateInstallCommandForManifests() {
   // }
 
   return `<strong>REVIEW PRE-REQ DOCS <a target="_blank"
-        href="https://github.com/alexwang19/alexwang19.github.io/blob/main/docs/installation_docs.md">HERE</a></strong>
+        href="https://github.com/sysdiglabs/install-form/blob/main/legacy-vulnscanner/docs/installation_docs.md">HERE</a></strong>
         <br>Generate Sysdig Manifests
         <br> 1. Fill out "Using Complete values.yaml" tab and download resulting values.yaml file
         <br> 2. Ensure you have recent helm binary installed ('helm version' to check). If not, please download a recent helm binary release <a target="_blank"
