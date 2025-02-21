@@ -1170,7 +1170,7 @@ function copyText() {
 function populateTagOptions() {
   const agentTagsdropdown = document.getElementById('agentTags');
 
-  fetch('https://quay.io/api/v1/repository/sysdig/agent-slim/tag/', {
+  fetch('https://quay.io/api/v1/repository/sysdig/agent-slim/tag/?limit=100', {
     headers: {
       'X-Requested-With': 'XMLHttpRequest'
     }
