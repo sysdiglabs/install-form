@@ -1239,7 +1239,7 @@ window.addEventListener('DOMContentLoaded', populateTagOptions);
 function populateClusterShieldTagOptions() {
   const runtimeScannerTagsdropdown = document.getElementById('runtimeScannerTags');
 
-  fetch('https://quay.io/api/v1/repository/sysdig/cluster-shield/tag/', {
+  fetch('https://quay.io/api/v1/repository/sysdig/cluster-shield/tag/?limit=100', {
     headers: {
       'X-Requested-With': 'XMLHttpRequest'
     }
