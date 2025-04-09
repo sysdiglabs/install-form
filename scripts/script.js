@@ -347,9 +347,9 @@ function setAgentConfigs(params) {
         pullSecrets: params.registryInputs[1].value,
       }
       agentConfigs.agent.image = {
-        pullSecrets: [
+        pullSecrets: {
           name: params.registryInputs[1].value
-        ]
+        }
       }
     }
   }
