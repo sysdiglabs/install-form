@@ -344,7 +344,6 @@ function setAgentConfigs(params) {
       agentConfigs.agent.slim.image = {
         repository: params.registryInputs[2].value,
         tag: params.registryInputs[4].value,
-        pullSecrets: params.registryInputs[1].value,
       }
       agentConfigs.agent.image = {
         pullSecrets: [ 
@@ -926,7 +925,7 @@ function setClusterShieldConfigs(params) {
       tag: params.registryInputs[5].value,
     }
     if (params.registryInputs[1].value != "") {
-      clusterShieldConfigs.clusterShield.image.pullSecrets = params.registryInputs[1].value;
+      clusterShieldConfigs.clusterShield.imagePullSecrets = [ { name: params.registryInputs[1].value } ];
     }
   }
   else {
