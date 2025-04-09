@@ -34,6 +34,12 @@ clusterShield:
     - name: SCANNER_RUN_TIMEOUT
       value: 3h
   cluster_shield:
+    cluster_scanner:
+      image_sbom_extractor:
+        registries_configuration:
+          treat_404_as_auth_error: true
+          fallback_to_tag_on_digest_failure: true
+          fallback_to_sbom_api_search_on_digest_failure: true
     log_level: err
     features:
       kubernetes_metadata:
