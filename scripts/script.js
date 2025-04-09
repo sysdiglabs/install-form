@@ -346,6 +346,9 @@ function setAgentConfigs(params) {
         tag: params.registryInputs[4].value,
         pullSecrets: params.registryInputs[1].value,
       }
+      agentConfigs.agent.image.pullSecrets = {
+        name: params.registryInputs[1].value
+      }
     }
   }
   else {
